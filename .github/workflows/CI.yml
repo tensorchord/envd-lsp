@@ -73,7 +73,7 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v2
         with:
-          path: ${{ env.GOPATH }}/src/github.com/tensorchord/envdenvd-lsp
+          path: ${{ env.GOPATH }}/src/github.com/tensorchord/envd-lsp
       - name: Setup Go
         uses: actions/setup-go@v2
         with:
@@ -87,19 +87,8 @@ jobs:
             ${{ runner.OS }}-build-${{ env.cache-name }}-
             ${{ runner.OS }}-build-
             ${{ runner.OS }}-
-      - name: Verify mockgen
-        run: |
-          make generate && git add pkg &&
-          git diff --cached --exit-code || (echo 'Please run "make generate" to verify generate' && exit 1);
       - name: Test
         run: make test
-      - name: send coverage
-        uses: shogo82148/actions-goveralls@v1
-        with:
-          path-to-profile: coverage.out
-          working-directory: ${{ env.GOPATH }}/src/github.com/tensorchord/envd-lsp
-          flag-name: ${{ matrix.os }}
-          parallel: true
   build:
     name: build
     strategy:
@@ -131,12 +120,3 @@ jobs:
             ${{ runner.OS }}-
       - name: Build
         run: make
-
-  # notifies that all test jobs are finished.
-  finish:
-    needs: test
-    runs-on: ubuntu-latest
-    steps:
-      - uses: shogo82148/actions-goveralls@v1
-        with:
-          parallel-finished: true
