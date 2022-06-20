@@ -1,0 +1,27 @@
+builds:
+- id: linux-build
+  main: ./cmd/envd-lsp
+  env:
+  - CGO_ENABLED=1
+  goos:
+  - linux
+  goarch:
+    - amd64
+  ignore:
+  - goos: linux
+    goarch: 386
+- id: darwin-build
+  main: ./cmd/envd-lsp
+  ldflags:
+  - -s
+  env:
+  - CGO_ENABLED=1
+  - CC=/home/runner/work/osxcross/target/bin/o64-clang
+  - CXX=/home/runner/work/osxcross/target/bin/o64-clang++
+  goos:
+  - darwin
+  goarch:
+    - amd64
+  ignore:
+  - goos: darwin
+    goarch: 386
