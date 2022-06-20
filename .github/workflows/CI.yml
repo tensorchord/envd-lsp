@@ -87,10 +87,6 @@ jobs:
             ${{ runner.OS }}-build-${{ env.cache-name }}-
             ${{ runner.OS }}-build-
             ${{ runner.OS }}-
-      - name: Verify mockgen
-        run: |
-          make generate && git add pkg &&
-          git diff --cached --exit-code || (echo 'Please run "make generate" to verify generate' && exit 1);
       - name: Test
         run: make test
       - name: send coverage
