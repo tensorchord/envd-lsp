@@ -73,7 +73,7 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v2
         with:
-          path: ${{ env.GOPATH }}/src/github.com/tensorchord/envdenvd-lsp
+          path: ${{ env.GOPATH }}/src/github.com/tensorchord/envd-lsp
       - name: Setup Go
         uses: actions/setup-go@v2
         with:
