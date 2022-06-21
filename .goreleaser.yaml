@@ -10,10 +10,20 @@ builds:
   ignore:
   - goos: linux
     goarch: 386
+  ldflags:
+    - -s -w
+    - -X github.com/tensorchord/envd-lsp/pkg/version.version={{ .Version }}
+    - -X github.com/tensorchord/envd-lsp/pkg/version.buildDate={{ .Date }}
+    - -X github.com/tensorchord/envd-lsp/pkg/version.gitCommit={{ .Commit }}
+    - -X github.com/tensorchord/envd-lsp/pkg/version.gitTreeState=clean
 - id: darwin-build
   main: ./cmd/envd-lsp
   ldflags:
-  - -s
+    - -s -w
+    - -X github.com/tensorchord/envd-lsp/pkg/version.version={{ .Version }}
+    - -X github.com/tensorchord/envd-lsp/pkg/version.buildDate={{ .Date }}
+    - -X github.com/tensorchord/envd-lsp/pkg/version.gitCommit={{ .Commit }}
+    - -X github.com/tensorchord/envd-lsp/pkg/version.gitTreeState=clean
   env:
   - CGO_ENABLED=1
   - PKG_CONFIG_SYSROOT_DIR=/sysroot/macos/amd64
@@ -32,16 +42,12 @@ archives:
     format: binary
     builds:
       - linux-build
-    replacements:
-      linux: Linux
-      amd64: x86_64
+    name_template: "{{ .ProjectName }}_Linux_x86_64"
   - id: darwin-build
     format: binary
     builds:
       - darwin-build
-    replacements:
-      darwin: Darwin
-      amd64: x86_64
+    name_template: "{{ .ProjectName }}_Darwin_x86_64"
 checksum:
   name_template: 'checksums.txt'
 snapshot:

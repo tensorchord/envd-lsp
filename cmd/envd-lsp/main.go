@@ -18,13 +18,13 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/tensorchord/envd/pkg/version"
 	cli "github.com/urfave/cli/v2"
 	"go.lsp.dev/protocol"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 
 	"github.com/tensorchord/envd-lsp/pkg/lsp"
+	"github.com/tensorchord/envd-lsp/pkg/version"
 )
 
 // go lsp server uses zap, thus we have to keep two loggers (logrus and zap) in envd.
