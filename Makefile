@@ -57,6 +57,9 @@ export SHELL := bash
 # It's necessary to set the errexit flags for the bash shell.
 export SHELLOPTS := errexit
 
+PACKAGE_NAME := github.com/tensorchord/envd-lsp
+GOLANG_CROSS_VERSION  ?= v1.17.6
+
 # Project main package location (can be multiple ones).
 CMD_DIR := ./cmd
 
@@ -95,7 +98,7 @@ export GOFLAGS ?= -count=1
 #
 
 # All targets.
-.PHONY: help lint test build container push addlicense debug debug-local build-local generate clean test-local addlicense-install mockgen-install pypi-build
+.PHONY: help lint test build container push addlicense debug debug-local build-local generate clean test-local addlicense-install release
 
 .DEFAULT_GOAL:=build
 
@@ -126,9 +129,6 @@ build-local:
 	    $(CMD_DIR)/$${target};                                                         \
 	done
 
-pypi-build: clean
-	@python setup.py sdist bdist_wheel
-
 # It is used by vscode to attach into the process.
 debug-local:
 	@for target in $(TARGETS); do                                                      \
@@ -158,3 +158,16 @@ fmt: ## Run go fmt against code.
 
 vet: ## Run go vet against code.
 	go vet ./...
+
+release:
+	docker run \
+		--rm \
+		--privileged \
+		-e CGO_ENABLED=1 \
+		-e GITHUB_TOKEN=$(GITHUB_TOKEN) \
+		-v /var/run/docker.sock:/var/run/docker.sock \
+		-v `pwd`:/go/src/$(PACKAGE_NAME) \
+		-v `pwd`/sysroot:/sysroot \
+		-w /go/src/$(PACKAGE_NAME) \
+		goreleaser/goreleaser-cross:${GOLANG_CROSS_VERSION} \
+		release --rm-dist --snapshot

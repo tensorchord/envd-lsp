@@ -16,8 +16,10 @@ builds:
   - -s
   env:
   - CGO_ENABLED=1
-  - CC=/home/runner/work/osxcross/target/bin/o64-clang
-  - CXX=/home/runner/work/osxcross/target/bin/o64-clang++
+  - PKG_CONFIG_SYSROOT_DIR=/sysroot/macos/amd64
+  - PKG_CONFIG_PATH=/sysroot/macos/amd64/usr/local/lib/pkgconfig
+  - CC=o64-clang
+  - CXX=o64-clang++
   goos:
   - darwin
   goarch:
