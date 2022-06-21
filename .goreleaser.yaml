@@ -27,3 +27,31 @@ builds:
   ignore:
   - goos: darwin
     goarch: 386
+archives:
+  - id: linux-build
+    format: binary
+    builds:
+      - linux-build
+    replacements:
+      linux: Linux
+      amd64: x86_64
+  - id: darwin-build
+    format: binary
+    builds:
+      - darwin-build
+    replacements:
+      darwin: Darwin
+      amd64: x86_64
+checksum:
+  name_template: 'checksums.txt'
+snapshot:
+  name_template: "{{ incpatch .Version }}-next"
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - '^build:'
+      - '^ci:'
+      - '^docs:'
+      - '^test:'
+      - '^chore:'
