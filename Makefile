@@ -26,7 +26,7 @@
 #
 
 # This repo's root import path (under GOPATH).
-ROOT := github.com/tensorchord/envd
+ROOT := github.com/tensorchord/envd-lsp
 
 # Target binaries. You can build multiple binaries for a single project.
 TARGETS := envd-lsp
