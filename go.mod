@@ -4,7 +4,7 @@ go 1.18
 
 require (
 	github.com/cockroachdb/errors v1.9.0
-	github.com/tensorchord/envd v0.2.2
+	github.com/tensorchord/envd v0.2.3
 	github.com/tilt-dev/starlark-lsp v0.0.0-20220517144608-76df2b44bc8a
 	github.com/urfave/cli/v2 v2.16.2
 	go.lsp.dev/jsonrpc2 v0.10.0
