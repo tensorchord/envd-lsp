@@ -4,9 +4,9 @@ go 1.18
 
 require (
 	github.com/cockroachdb/errors v1.9.0
-	github.com/tensorchord/envd v0.1.1-0.20220620134703-6bd547ea3f31
+	github.com/tensorchord/envd v0.2.0
 	github.com/tilt-dev/starlark-lsp v0.0.0-20220517144608-76df2b44bc8a
-	github.com/urfave/cli/v2 v2.8.1
+	github.com/urfave/cli/v2 v2.16.2
 	go.lsp.dev/jsonrpc2 v0.10.0
 	go.lsp.dev/protocol v0.12.0
 	go.uber.org/zap v1.21.0
@@ -15,7 +15,7 @@ require (
 require (
 	github.com/cockroachdb/logtags v0.0.0-20211118104740-dabe8e521a4f // indirect
 	github.com/cockroachdb/redact v1.1.3 // indirect
-	github.com/cpuguy83/go-md2man/v2 v2.0.1 // indirect
+	github.com/cpuguy83/go-md2man/v2 v2.0.2 // indirect
 	github.com/getsentry/sentry-go v0.12.0 // indirect
 	github.com/gogo/protobuf v1.3.2 // indirect
 	github.com/kr/pretty v0.3.0 // indirect
@@ -31,5 +31,5 @@ require (
 	go.lsp.dev/uri v0.3.0 // indirect
 	go.uber.org/atomic v1.9.0 // indirect
 	go.uber.org/multierr v1.8.0 // indirect
-	golang.org/x/sys v0.0.0-20220520151302-bc2c85ada10a // indirect
+	golang.org/x/sys v0.0.0-20220825204002-c680a09ffe64 // indirect
 )
