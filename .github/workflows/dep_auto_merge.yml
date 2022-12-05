@@ -1,0 +1,31 @@
+# dep_auto_merge.yml file will merge it when 
+# the dependabot updates envd and creates a PR.
+
+# see also [dep_push_tag.yml] and [dependabot.yml]
+
+name: dependabot auto merge
+
+on:
+  pull_request:
+
+jobs:
+  dependabot-auto-merge:
+    name: Merge a dependabot PR
+    runs-on: ubuntu-latest
+    # Checking the actor will prevent your Action run failing on non-Dependabot
+    # PRs but also ensures that it only does work for Dependabot PRs.
+    if: github.actor == 'dependabot[bot]'
+    steps:
+    # The step will fail if there's no metadata and so the approval will not occur.
+    - name: Dependabot metadata
+      id: dependabot-metadata
+      uses: dependabot/fetch-metadata@v1.3.5
+      with:
+        github-token: "${{ secrets.GITHUB_TOKEN }}"
+    - name: Instruct dependabot to squash & merge
+      uses: mshick/add-pr-comment@v2
+      with:
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+        allow-repeats: true
+        message: |
+          @dependabot squash and merge

@@ -1,0 +1,13 @@
+# dependabot.yml file to upgrade envd package dependency
+
+# see also [dep_auto_merge.yml] and [dep_push_tag.yml]
+
+version: 2
+updates:
+  - package-ecosystem: "gomod"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    allow:
+      # Only allow updates for envd
+      - dependency-name: "github.com/tensorchord/envd"
