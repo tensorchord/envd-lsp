@@ -1,6 +1,6 @@
 # dependabot.yml file to upgrade envd package dependency
 
-# see also [dep_auto_merge.yml] and [dep_push_tag.yml]
+# see also [dep_trig_release.yml]
 
 version: 2
 updates:
