@@ -14,6 +14,8 @@ jobs:
   dependabot-push-tag:
     name: Push a tag for dependabot PR
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     # Push a tag happens when a PR of dependabot is merged
     if: {{ (github.actor == 'dependabot[bot]') && (github.event.pull_request.merged == true) }}
     steps:
