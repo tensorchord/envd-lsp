@@ -26,12 +26,6 @@ jobs:
       uses: dependabot/fetch-metadata@v1.3.5
       with:
         github-token: "${{ secrets.GITHUB_TOKEN }}"
-    - name: Wait other jobs(CI and lint)
-      uses: kachick/wait-other-jobs@v1
-      timeout-minutes: 10
-      with:
-        min-interval-seconds: '10'
-        github-token: '${{ secrets.GITHUB_TOKEN }}'
     - name: Approve PR
       run: gh pr review --approve "$PR_URL"
       env:
