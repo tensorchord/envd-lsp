@@ -4,9 +4,9 @@ go 1.18
 
 require (
 	github.com/cockroachdb/errors v1.9.0
-	github.com/tensorchord/envd v0.2.5
+	github.com/tensorchord/envd v0.2.6
 	github.com/tilt-dev/starlark-lsp v0.0.0-20220517144608-76df2b44bc8a
-	github.com/urfave/cli/v2 v2.23.6
+	github.com/urfave/cli/v2 v2.23.7
 	go.lsp.dev/jsonrpc2 v0.10.0
 	go.lsp.dev/protocol v0.12.0
 	go.uber.org/zap v1.21.0
@@ -31,5 +31,5 @@ require (
 	go.lsp.dev/uri v0.3.0 // indirect
 	go.uber.org/atomic v1.9.0 // indirect
 	go.uber.org/multierr v1.8.0 // indirect
-	golang.org/x/sys v0.2.0 // indirect
+	golang.org/x/sys v0.3.0 // indirect
 )
