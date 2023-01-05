@@ -36,6 +36,13 @@ jobs:
       env:
         PR_URL: ${{ github.event.pull_request.html_url }}
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Wait for status checks
+      uses: WyriHaximus/github-action-wait-for-status@v1.7.1
+      with:
+        ignoreActions: "Merge a dependabot PR"
+        checkInterval: 10
+      env:
+        GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
   dependabot-push-tag:
     name: Push a tag for dependabot PR
     runs-on: ubuntu-latest
@@ -43,6 +50,9 @@ jobs:
     needs: dependabot-auto-merge
     steps:
     - uses: actions/checkout@v3
+      with:
+        ref: 'main'
+        fetch-depth: 0
     - name: Dependabot metadata
       id: dependabot-metadata
       uses: dependabot/fetch-metadata@v1.3.5
@@ -50,10 +60,11 @@ jobs:
         github-token: "${{ secrets.GITHUB_TOKEN }}"
     - name: Bump version and push tag
       id: tag_version
-      uses: mathieudutour/github-tag-action@v6.1
-      with:
-        custom_tag: ${{ steps.dependabot-metadata.outputs.new-version }}
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        git tag v$TAG_NAME
+        git push origin v$TAG_NAME
+      env:
+        TAG_NAME: ${{ steps.dependabot-metadata.outputs.new-version }}
   dependabot-release: 
     needs: dependabot-push-tag
     uses: ./.github/workflows/release.yml
