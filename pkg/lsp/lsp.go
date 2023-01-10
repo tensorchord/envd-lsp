@@ -23,20 +23,19 @@ import (
 	"os"
 
 	"github.com/cockroachdb/errors"
-	"github.com/tilt-dev/starlark-lsp/pkg/analysis"
 	"github.com/tilt-dev/starlark-lsp/pkg/document"
-	"github.com/tilt-dev/starlark-lsp/pkg/server"
 	"go.lsp.dev/jsonrpc2"
 	"go.lsp.dev/protocol"
 	"go.uber.org/zap"
 
+	"github.com/tensorchord/envd-lsp/pkg/analysis"
+	"github.com/tensorchord/envd-lsp/pkg/server"
 	"github.com/tensorchord/envd/envd"
 )
 
-type BuiltinAnalyzerOptionProvider = func() analysis.AnalyzerOption
 type BuiltinFSProvider = func() fs.FS
 
-var builtinAnalyzerOption BuiltinAnalyzerOptionProvider = nil
+var builtinAnalyzerOption analysis.BuiltinAnalyzerOptionProvider = nil
 var providedManagerOptions []document.ManagerOpt
 
 type Server interface {
