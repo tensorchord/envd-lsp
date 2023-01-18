@@ -39,6 +39,7 @@ func TestLoadEnvdEntry(t *testing.T) {
 		{doc: "def mod():\n    pass\ndef build():\n    pass\n", expect_data: []uint32{2, 4, 0, 0, 0}},
 		{doc: "a = include(\"a.A\")\n\nb = include(\"b.B\")\n", expect_data: []uint32{0, 4, 0, 1, 0, 2, 4, 0, 1, 0}},
 		{doc: "a = include(\"a.A\") b = include(\"b.B\")\n", expect_data: []uint32{0, 4, 0, 1, 0, 0, 19, 0, 1, 0}},
+		{doc: "def build_gpu():\n    pass\ndef build():\n    pass\n", expect_data: []uint32{0, 4, 0, 0, 0, 2, 4, 0, 0, 0}},
 	}
 
 	for _, tt := range tests {
