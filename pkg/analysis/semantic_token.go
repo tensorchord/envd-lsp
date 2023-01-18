@@ -26,11 +26,11 @@ import (
 	"github.com/tensorchord/envd-lsp/pkg/query"
 )
 
-func (a *Analyzer) SemanticToken(ctx context.Context, doc document.Document) []uint32 {
+func (a Analyzer) SemanticToken(ctx context.Context, doc document.Document) []uint32 {
 	logger := protocol.LoggerFromContext(ctx)
 	logger.Debug("serve semantic token request", zap.String("path", string(doc.URI())))
 
-	entry := query.LoadEnvdEntry(doc)
+	entries := query.LoadEnvdEntries(doc)
 	imports := query.LoadModuleImport(doc)
 
 	// https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#textDocument_semanticTokens
@@ -40,19 +40,21 @@ func (a *Analyzer) SemanticToken(ctx context.Context, doc document.Document) []u
 	// tokenType 1 -> SemanticTokenImport
 	absolute_view := [][5]uint32{}
 
-	if !entry.IsNull() && entry.StartPoint().Row == entry.EndPoint().Row {
-		absolute_view = append(absolute_view, [5]uint32{entry.StartPoint().Row, entry.StartPoint().Column,
-			entry.EndPoint().Row - entry.StartPoint().Row, 0, 0})
-	} else if !entry.IsNull() && entry.StartPoint().Row != entry.EndPoint().Row {
-		logger.Warn(`envd entry "def build()" not in single line`, zap.Uint32("start", entry.StartPoint().Row),
-			zap.Uint32("end", entry.EndPoint().Row))
+	for _, item := range entries {
+		if !item.IsNull() && item.StartPoint().Row == item.EndPoint().Row {
+			absolute_view = append(absolute_view, [5]uint32{item.StartPoint().Row, item.StartPoint().Column,
+				item.EndPoint().Row - item.StartPoint().Row, 0, 0})
+		} else if !item.IsNull() && item.StartPoint().Row != item.EndPoint().Row {
+			logger.Warn(`envd entry "def build()" not in single line"`, zap.Uint32("start", item.StartPoint().Row),
+				zap.Uint32("end", item.EndPoint().Row))
+		}
 	}
 
 	for _, item := range imports {
 		if !item.IsNull() && item.StartPoint().Row == item.EndPoint().Row {
 			absolute_view = append(absolute_view, [5]uint32{item.StartPoint().Row, item.StartPoint().Column,
 				item.EndPoint().Row - item.StartPoint().Row, 1, 0})
-		} else if !entry.IsNull() && entry.StartPoint().Row != entry.EndPoint().Row {
+		} else if !item.IsNull() && item.StartPoint().Row != item.EndPoint().Row {
 			logger.Warn(`envd import "include()" not in single line"`, zap.Uint32("start", item.StartPoint().Row),
 				zap.Uint32("end", item.EndPoint().Row))
 		}

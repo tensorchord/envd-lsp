@@ -26,26 +26,28 @@ import (
 func TestLoadEnvdEntry(t *testing.T) {
 	tests := []struct {
 		doc           string
-		expect_lineno int32
+		expect_lineno []uint32
+		uint32
 	}{
-		{doc: "", expect_lineno: -1},
-		{doc: "i = int(5)", expect_lineno: -1},
-		{doc: "envdlib = include(\"https://github.com/tensorchord/envdlib\")\ndef foo():\n    pass\n", expect_lineno: -1},
-		{doc: "envdlib = include(\"https://github.com/tensorchord/envdlib\")\ndef build():\n    pass\n", expect_lineno: 1},
-		{doc: "def build():\n    pass\n", expect_lineno: 0},
-		{doc: "def mod():\n    pass\ndef build():\n    pass\n", expect_lineno: 2},
+		{doc: "", expect_lineno: []uint32{}},
+		{doc: "i = int(5)", expect_lineno: []uint32{}},
+		{doc: "envdlib = include(\"https://github.com/tensorchord/envdlib\")\ndef foo():\n    pass\n", expect_lineno: []uint32{}},
+		{doc: "envdlib = include(\"https://github.com/tensorchord/envdlib\")\ndef build():\n    pass\n", expect_lineno: []uint32{1}},
+		{doc: "def build():\n    pass\n", expect_lineno: []uint32{0}},
+		{doc: "def mod():\n    pass\ndef build():\n    pass\n", expect_lineno: []uint32{2}},
+		{doc: "def build_gpu():\n    pass\ndef build():\n    pass\n", expect_lineno: []uint32{0, 2}},
 	}
 
 	for _, tt := range tests {
 		t.Run(tt.doc, func(t *testing.T) {
 			doc := newDocument(tt.doc)
-			node := LoadEnvdEntry(doc)
+			nodes := LoadEnvdEntries(doc)
 
-			if node.IsNull() {
-				assert.Equal(t, int32(-1), tt.expect_lineno)
-			} else {
-				assert.Equal(t, int32(node.StartPoint().Row), tt.expect_lineno)
+			actual := []uint32{}
+			for _, node := range nodes {
+				actual = append(actual, node.StartPoint().Row)
 			}
+			assert.ElementsMatch(t, actual, tt.expect_lineno)
 		})
 	}
 }
