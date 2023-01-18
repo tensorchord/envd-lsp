@@ -232,6 +232,7 @@ github.com/stretchr/testify v1.7.0/go.mod h1:6Fq8oRcR53rry900zMqJjRRixrwX3KX962/
 github.com/stretchr/testify v1.7.1/go.mod h1:6Fq8oRcR53rry900zMqJjRRixrwX3KX962/h/Wwjteg=
 github.com/stretchr/testify v1.8.0/go.mod h1:yNjHg4UonilssWZ8iaSj1OCr/vHnekPRkoO+kdMU+MU=
 github.com/stretchr/testify v1.8.1 h1:w7B6lhMri9wdJUVmEZPGGhZzrYTPvgJArz7wNPgYKsk=
+github.com/stretchr/testify v1.8.1/go.mod h1:w2LPCIKwWwSfY2zedu0+kehJoqGctiVI29o6fzry7u4=
 github.com/tensorchord/envd v0.3.6 h1:XQOerDeOCdRC0rhdBYXICNzMZj6QW4+9lnpxpLzS4C8=
 github.com/tensorchord/envd v0.3.6/go.mod h1:OrUwJDbKNTQpHjPJcV1bDZMPTlmmU59PRSkfHbECwyo=
 github.com/tilt-dev/starlark-lsp v0.0.0-20220517144608-76df2b44bc8a h1:FH/Cdz0iYB3O1++o8Zn+Wjh1CMT1yQEMseul3nfzMCI=
