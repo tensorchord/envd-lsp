@@ -34,9 +34,14 @@ builds:
   - darwin
   goarch:
     - amd64
+    - arm64
   ignore:
   - goos: darwin
     goarch: 386
+# https://goreleaser.com/customization/universalbinaries/?h=universal_binaries
+universal_binaries:
+  - replace: true
+    id: darwin-build
 archives:
   - id: linux-build
     format: binary
@@ -47,7 +52,7 @@ archives:
     format: binary
     builds:
       - darwin-build
-    name_template: "{{ .ProjectName }}_Darwin_x86_64"
+    name_template: "{{ .ProjectName }}_Darwin_all"
 checksum:
   name_template: 'checksums.txt'
 snapshot:
