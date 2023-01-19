@@ -52,7 +52,7 @@ type fixture struct {
 }
 
 func mockAnalyzer(ctx context.Context, api string) *analysis.Analyzer {
-	stubs := SyntaxApiStubs(api)()
+	stubs := ApiVersionStubs(api)()
 	opts := []analysis.AnalyzerOption{
 		analysis.WithStarlarkBuiltins(), analysis.WithBuiltins(stubs),
 	}

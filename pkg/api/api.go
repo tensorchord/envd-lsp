@@ -61,5 +61,5 @@ func ArgValidator(clicontext *cli.Context, v string) error {
 		keys[i] = k
 		i++
 	}
-	return errors.Errorf(`Argument syntax only allows %v, found "%v"`, keys, v)
+	return errors.Errorf(`Argument api only allows %v, found "%v"`, keys, v)
 }

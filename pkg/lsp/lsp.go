@@ -46,9 +46,9 @@ type generalServer struct {
 	fsProvider func() fs.FS
 }
 
-func SyntaxApiStubs(syntax string) func() fs.FS {
+func ApiVersionStubs(api string) func() fs.FS {
 	return func() fs.FS {
-		f, err := fs.Sub(envd.ApiStubs(), syntax)
+		f, err := fs.Sub(envd.ApiStubs(), api)
 		if err != nil {
 			panic(err)
 		}
@@ -56,9 +56,9 @@ func SyntaxApiStubs(syntax string) func() fs.FS {
 	}
 }
 
-func New(syntax string) Server {
+func New(api string) Server {
 	return &generalServer{
-		fsProvider: SyntaxApiStubs(syntax),
+		fsProvider: ApiVersionStubs(api),
 	}
 }
 

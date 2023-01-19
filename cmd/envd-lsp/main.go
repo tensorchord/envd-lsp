@@ -37,8 +37,8 @@ func startLSP(clicontext *cli.Context) error {
 	defer cleanup()
 	ctx := protocol.WithLogger(clicontext.Context, logger)
 
-	syntax := api.APIOptions[clicontext.String("syntax")]
-	s := lsp.New(syntax)
+	apiVersion := api.APIOptions[clicontext.String("api")]
+	s := lsp.New(apiVersion)
 	err := s.Start(ctx, clicontext.String("address"))
 	return err
 }
@@ -77,8 +77,8 @@ func main() {
 			Usage: "Enable debug logging",
 		},
 		&cli.StringFlag{
-			Name:   "syntax",
-			Usage:  "Syntax to use of envd",
+			Name:   "api",
+			Usage:  "API version to use of envd",
 			Value:  "stable",
 			Action: api.ArgValidator,
 		},
