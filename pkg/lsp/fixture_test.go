@@ -1,3 +1,17 @@
+// Copyright 2023 The envd Authors
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 // copied from https://github.com/tilt-dev/starlark-lsp/blob/main/pkg/server/fixture_test.go
 // to enable test suite for LSP Server
 
@@ -5,7 +19,6 @@ package lsp
 
 import (
 	"context"
-	"encoding/json"
 	"fmt"
 	"net"
 	"runtime/debug"
@@ -135,45 +148,11 @@ func (f *fixture) mustWriteDocument(path string, source string) {
 	)
 }
 
-func (f *fixture) requireDocContents(path string, input string) {
-	f.t.Helper()
-	doc, err := f.docManager.Read(f.ctx, uri.File(path))
-	require.NoErrorf(f.t, err, "Failed to read document %q", path)
-	defer doc.Close()
-	require.NotNil(f.t, doc.Tree(), "Document tree was nil")
-	require.NotNil(f.t, doc.Tree().RootNode(),
-		"Document root node was nil")
-	require.Equal(f.t, input, doc.Content(doc.Tree().RootNode()),
-		"Document contents did not match")
-}
-
 func (f *fixture) mustEditorCall(method string, params interface{}, result interface{}) jsonrpc2.ID {
 	f.t.Helper()
 	id, err := f.editorConn.Call(f.ctx, method, params, result)
 	require.NoErrorf(f.t, err, "RPC call %q returned an error", method)
 	return id
-}
-
-// requireNextEditorEvent fails the test if the next event broadcast to the
-// editor from the server is not for the given method, fails deserialization,
-// or is not received within a reasonable amount of time.
-//
-// Tests can assert further on the unmarshalled parameters.
-func (f *fixture) requireNextEditorEvent(method string, params interface{}) {
-	f.t.Helper()
-
-	select {
-	case <-f.ctx.Done():
-		return
-	case <-time.After(time.Second):
-		require.Failf(f.t, "Timed out waiting for %s event", method)
-	case event := <-f.editorEvents:
-		require.NotNil(f.t, event, "Received nil event")
-		require.Equal(f.t, method, event.Method(), "Event was for unexpected method")
-		require.NoErrorf(f.t, json.Unmarshal(event.Params(), params),
-			"Could not unmarshal params for %s event", method)
-		return
-	}
 }
 
 func newDocumentManager(t testing.TB) *document.Manager {

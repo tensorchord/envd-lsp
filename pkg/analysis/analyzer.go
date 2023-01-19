@@ -37,7 +37,7 @@ func NewAnalyzer(ctx context.Context, opts ...starlark_analyzer.AnalyzerOption) 
 	return &Analyzer{analysis}, nil
 }
 
-// Referrnce of starlark-lsp/pkg/analysis/builtins
+// Reference of starlark-lsp/pkg/analysis/builtins
 func WithBuiltins(f fs.FS) AnalyzerOption {
 	return starlark_analyzer.WithBuiltins(f)
 }
