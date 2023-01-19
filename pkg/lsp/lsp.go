@@ -46,9 +46,19 @@ type generalServer struct {
 	fsProvider func() fs.FS
 }
 
-func New() Server {
+func ApiVersionStubs(api string) func() fs.FS {
+	return func() fs.FS {
+		f, err := fs.Sub(envd.ApiStubs(), api)
+		if err != nil {
+			panic(err)
+		}
+		return f
+	}
+}
+
+func New(api string) Server {
 	return &generalServer{
-		fsProvider: envd.ApiStubs,
+		fsProvider: ApiVersionStubs(api),
 	}
 }
 

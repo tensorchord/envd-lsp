@@ -23,6 +23,7 @@ import (
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 
+	"github.com/tensorchord/envd-lsp/pkg/api"
 	"github.com/tensorchord/envd-lsp/pkg/lsp"
 	"github.com/tensorchord/envd-lsp/pkg/version"
 )
@@ -36,7 +37,8 @@ func startLSP(clicontext *cli.Context) error {
 	defer cleanup()
 	ctx := protocol.WithLogger(clicontext.Context, logger)
 
-	s := lsp.New()
+	apiVersion := api.APIOptions[clicontext.String("api")]
+	s := lsp.New(apiVersion)
 	err := s.Start(ctx, clicontext.String("address"))
 	return err
 }
@@ -73,6 +75,12 @@ func main() {
 		&cli.BoolFlag{
 			Name:  "debug",
 			Usage: "Enable debug logging",
+		},
+		&cli.StringFlag{
+			Name:   "api",
+			Usage:  "API version to use of envd",
+			Value:  "stable",
+			Action: api.ArgValidator,
 		},
 	}
 
