@@ -49,24 +49,24 @@ func TestLSP_Hover(t *testing.T) {
 
 }
 
-func TestLSP_Hover_Bad_API(t *testing.T) {
-	f := newFixture(t, "bad-api")
+func TestServer_SemanticToken(t *testing.T) {
+	f := newFixture(t, "stable")
 
-	docURI := uri.File("./bad-api.envd")
-	doc := `base(os="ubuntu20.04", language="python3")`
+	docURI := uri.File("./semantic.star")
+	doc := `
+def build():
+	pass
+def build_GPU():
+	pass
+`
 
-	f.mustWriteDocument("./bad-api.envd", doc)
+	f.mustWriteDocument("./semantic.star", doc)
 
-	var resp protocol.Hover
-	f.mustEditorCall(protocol.MethodTextDocumentHover, protocol.HoverParams{
-		TextDocumentPositionParams: protocol.TextDocumentPositionParams{
-			TextDocument: protocol.TextDocumentIdentifier{URI: docURI},
-			Position: protocol.Position{
-				Line:      0,
-				Character: 0,
-			},
-		},
+	var resp protocol.SemanticTokens
+
+	f.mustEditorCall(protocol.MethodSemanticTokensFull, protocol.SemanticTokensParams{
+		TextDocument: protocol.TextDocumentIdentifier{URI: docURI},
 	}, &resp)
 
-	require.Empty(t, resp.Contents.Value)
+	require.Len(t, resp.Data, 10)
 }
