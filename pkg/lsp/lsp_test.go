@@ -52,7 +52,7 @@ func TestLSP_Hover(t *testing.T) {
 func TestServer_SemanticToken(t *testing.T) {
 	f := newFixture(t, "stable")
 
-	docURI := uri.File("./semantic.star")
+	docURI := uri.File("./semantic.envd")
 	doc := `
 def build():
 	pass
@@ -60,7 +60,7 @@ def build_GPU():
 	pass
 `
 
-	f.mustWriteDocument("./semantic.star", doc)
+	f.mustWriteDocument("./semantic.envd", doc)
 
 	var resp protocol.SemanticTokens
 
