@@ -18,7 +18,9 @@ import (
 
 	"github.com/tensorchord/envd-lsp/pkg/analysis"
 	"github.com/tilt-dev/starlark-lsp/pkg/document"
+	"github.com/tilt-dev/starlark-lsp/pkg/middleware"
 	starlark_server "github.com/tilt-dev/starlark-lsp/pkg/server"
+	"go.lsp.dev/jsonrpc2"
 	"go.lsp.dev/protocol"
 )
 
@@ -36,4 +38,10 @@ func NewServer(cancel context.CancelFunc, notifier protocol.Client, docManager *
 		docs:     docManager,
 		analyzer: analyzer,
 	}
+}
+
+// Overwrite starlark-lsp handler
+func (s *Server) Handler(middlewares ...middleware.Middleware) jsonrpc2.Handler {
+	serverHandler := protocol.ServerHandler(s, jsonrpc2.MethodNotFoundHandler)
+	return middleware.WrapHandler(serverHandler, middlewares...)
 }

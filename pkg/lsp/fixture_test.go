@@ -36,11 +36,12 @@ import (
 	"go.uber.org/zap"
 	"go.uber.org/zap/zaptest"
 
-	"github.com/tilt-dev/starlark-lsp/pkg/analysis"
+	"github.com/tensorchord/envd-lsp/pkg/analysis"
+	"github.com/tensorchord/envd-lsp/pkg/api"
+	"github.com/tensorchord/envd-lsp/pkg/server"
 	"github.com/tilt-dev/starlark-lsp/pkg/document"
 	"github.com/tilt-dev/starlark-lsp/pkg/middleware"
 	"github.com/tilt-dev/starlark-lsp/pkg/query"
-	"github.com/tilt-dev/starlark-lsp/pkg/server"
 )
 
 type fixture struct {
@@ -51,8 +52,9 @@ type fixture struct {
 	editorEvents chan jsonrpc2.Request
 }
 
-func mockAnalyzer(ctx context.Context, api string) *analysis.Analyzer {
-	stubs := ApiVersionStubs(api)()
+func mockAnalyzer(ctx context.Context, apiPick string) *analysis.Analyzer {
+	apiVersion := api.APIOptions[apiPick]
+	stubs := ApiVersionStubs(apiVersion)()
 	opts := []analysis.AnalyzerOption{
 		analysis.WithStarlarkBuiltins(), analysis.WithBuiltins(stubs),
 	}
