@@ -44,7 +44,10 @@ func TestLSP_Hover(t *testing.T) {
 			},
 		}, &resp)
 
+		require.Equal(t, resp.Contents.Kind, protocol.Markdown)
 		require.NotEmpty(t, resp.Contents.Value)
+		require.Contains(t, resp.Contents.Value, "Parameters")
+		require.Contains(t, resp.Contents.Value, "\\\n")
 	}
 
 }
