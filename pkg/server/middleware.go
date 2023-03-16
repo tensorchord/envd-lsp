@@ -14,7 +14,7 @@
 
 package server
 
-// Referrnce of starlark-lsp/pkg/server/middleware
+// Reference of starlark-lsp/pkg/server/middleware
 import (
 	starlark_server "github.com/tilt-dev/starlark-lsp/pkg/server"
 )
