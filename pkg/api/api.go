@@ -29,13 +29,12 @@ import (
 const StableAPI = "v0"
 
 // APIOptions contains "stable" / "latest" and all actual api version: "v0", "v1", ...
-var APIOptions map[string]string = map[string]string{"stable": StableAPI}
+var APIOptions = map[string]string{"stable": StableAPI}
 
 func init() {
 	files, err := fs.ReadDir(envd.ApiStubs(), ".")
 	if err != nil {
 		log.Fatal(err)
-		panic(err)
 	}
 	keys := []string{}
 	for _, f := range files {
