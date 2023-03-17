@@ -5,10 +5,10 @@ go 1.18
 require (
 	github.com/cockroachdb/errors v1.9.1
 	github.com/smacker/go-tree-sitter v0.0.0-20220209044044-0d3022e933c3
-	github.com/stretchr/testify v1.8.1
-	github.com/tensorchord/envd v0.3.13
+	github.com/stretchr/testify v1.8.2
+	github.com/tensorchord/envd v0.3.14
 	github.com/tilt-dev/starlark-lsp v0.0.0-20230210155543-84c13fe0ff94
-	github.com/urfave/cli/v2 v2.24.3
+	github.com/urfave/cli/v2 v2.25.0
 	go.lsp.dev/jsonrpc2 v0.10.0
 	go.lsp.dev/protocol v0.12.0
 	go.lsp.dev/uri v0.3.0
@@ -35,6 +35,6 @@ require (
 	go.lsp.dev/pkg v0.0.0-20210717090340-384b27a52fb2 // indirect
 	go.uber.org/atomic v1.9.0 // indirect
 	go.uber.org/multierr v1.8.0 // indirect
-	golang.org/x/sys v0.5.0 // indirect
+	golang.org/x/sys v0.6.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
