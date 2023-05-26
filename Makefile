@@ -58,7 +58,7 @@ export SHELL := bash
 export SHELLOPTS := errexit
 
 PACKAGE_NAME := github.com/tensorchord/envd-lsp
-GOLANG_CROSS_VERSION  ?= v1.17.6
+GOLANG_CROSS_VERSION  ?= v1.20.4
 
 # Project main package location (can be multiple ones).
 CMD_DIR := ./cmd

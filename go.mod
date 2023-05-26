@@ -1,6 +1,6 @@
 module github.com/tensorchord/envd-lsp
 
-go 1.18
+go 1.20
 
 require (
 	github.com/cockroachdb/errors v1.9.1
