@@ -6,7 +6,7 @@ require (
 	github.com/cockroachdb/errors v1.10.0
 	github.com/smacker/go-tree-sitter v0.0.0-20220209044044-0d3022e933c3
 	github.com/stretchr/testify v1.8.4
-	github.com/tensorchord/envd v0.3.30
+	github.com/tensorchord/envd v0.3.31
 	github.com/tilt-dev/starlark-lsp v0.0.0-20230210155543-84c13fe0ff94
 	github.com/urfave/cli/v2 v2.25.7
 	go.lsp.dev/jsonrpc2 v0.10.0
