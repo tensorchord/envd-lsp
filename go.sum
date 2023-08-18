@@ -51,8 +51,8 @@ github.com/stretchr/testify v1.4.0/go.mod h1:j7eGeouHqKxXV5pUuKE4zz7dFj8WfuZ+81P
 github.com/stretchr/testify v1.7.0/go.mod h1:6Fq8oRcR53rry900zMqJjRRixrwX3KX962/h/Wwjteg=
 github.com/stretchr/testify v1.8.4 h1:CcVxjf3Q8PM0mHUKJCdn+eZZtm5yQwehR5yeSVQQcUk=
 github.com/stretchr/testify v1.8.4/go.mod h1:sz/lmYIOXD/1dqDmKjjqLyZ2RngseejIcXlSw2iwfAo=
-github.com/tensorchord/envd v0.3.38 h1:FlqG4rQGgnWuJtIFBm+M5ybhPA8r2CvDS7skqjnOsL4=
-github.com/tensorchord/envd v0.3.38/go.mod h1:NUuEtpTRZ6TS02oxOdrLP0B4gcp7mJ3IkXhXA5GXcVA=
+github.com/tensorchord/envd v0.3.39 h1:NG13yaHB/Yp5Y2UqE9Tw08o6N4thqEGj3xkAgfwg/9I=
+github.com/tensorchord/envd v0.3.39/go.mod h1:NUuEtpTRZ6TS02oxOdrLP0B4gcp7mJ3IkXhXA5GXcVA=
 github.com/tilt-dev/starlark-lsp v0.0.0-20230210155543-84c13fe0ff94 h1:IV0e4/w6PswnHdVmAZ6Ipo8ZdgaPn1nWTNR7Sd2LETo=
 github.com/tilt-dev/starlark-lsp v0.0.0-20230210155543-84c13fe0ff94/go.mod h1:bnkWmNDRqs9DgHgrImOSt6dFAcVcN14pqhR3iZsWWaE=
 github.com/urfave/cli/v2 v2.25.7 h1:VAzn5oq403l5pHjc4OhD54+XGO9cdKVL/7lDjF+iKUs=
